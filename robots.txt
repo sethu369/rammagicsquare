@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://rammagicsquare.vercel.app/sitemap.xml
