@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>About · RAM_MagicSquare</title>
+<link rel="stylesheet" href="about.css"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+<canvas id="math-canvas"></canvas>
+
+<div class="page-wrapper">
+
+<nav role="navigation" aria-label="Main navigation">
+  <a href="index.html" class="nav-logo" aria-label="RAM MagicSquare Home">
+    <div class="nav-logo-mark" aria-hidden="true">
+      <span class="nav-logo-cell"></span>
+      <span class="nav-logo-cell"></span>
+      <span class="nav-logo-cell"></span>
+      <span class="nav-logo-cell"></span>
+    </div>
+    <span class="nav-brand">RAM_MagicSquare</span>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html" class="active">About</a></li>
+  </ul>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="page-hero">
+  <p class="eyebrow">The Mathematics Behind the Magic</p>
+  <h1>About RAM_MagicSquare</h1>
+</div>
+
+<!-- RAMANUJAN BIO -->
+<section class="section reveal" aria-labelledby="bio-heading">
+  <span class="section-tag">§ The Genius</span>
+  <h2 class="section-title" id="bio-heading">Srinivasa Ramanujan</h2>
+  <div class="bio-layout">
+    <div class="bio-portrait" aria-hidden="true">
+      <img src="ramanujan-portrait.png" alt="Portrait of Srinivasa Ramanujan">
+      <div class="portrait-name">Srinivasa Ramanujan</div>
+      <div class="portrait-dates">22 Dec 1887 · 26 Apr 1920</div>
+      <div class="portrait-badge">FRS · Mathematical Genius</div>
+    </div>
+    <div class="bio-text">
+      <p>
+        Srinivasa Ramanujan was an Indian mathematician who lived during the British Rule in India.
+        Though he had almost no formal training in pure mathematics, he made extraordinary contributions
+        to mathematical analysis, number theory, infinite series, and continued fractions.
+      </p>
+      <p>
+        Born in Erode, Tamil Nadu on 22 December 1887, Ramanujan displayed an uncanny ability
+        with numbers from childhood. By age 15 he had mastered advanced trigonometry and
+        discovered theorems independently.
+      </p>
+      <p>
+        His collaboration with G.H. Hardy at Cambridge became legendary. Hardy called their
+        partnership one of the most remarkable in mathematical history, marveling at Ramanujan's
+        intuitive leaps — results that seemed to come from nowhere yet proved rigorously correct.
+      </p>
+      <p>
+        Among his enduring creations is the famous <strong style="color:var(--green)">4×4 Magic Square</strong>
+        derived from his own date of birth — a beautiful demonstration of the hidden order
+        concealed within numbers.
+      </p>
+    </div>
+  </div>
+
+  <div class="fact-grid">
+    <div class="fact-card">
+      <div class="fact-num">3,900+</div>
+      <div class="fact-label">Results & theorems</div>
+    </div>
+    <div class="fact-card">
+      <div class="fact-num">1729</div>
+      <div class="fact-label">Hardy–Ramanujan number</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider" aria-hidden="true">
+  <span class="divider-line"></span>
+  <span class="divider-glyph">∑</span>
+  <span class="divider-line"></span>
+</div>
+
+<!-- MAGIC SQUARE ANATOMY -->
+<section class="section reveal" aria-labelledby="anatomy-heading">
+  <span class="section-tag">§ The Mathematics</span>
+  <h2 class="section-title" id="anatomy-heading">Anatomy of the Magic Square</h2>
+
+  <div class="anatomy-section">
+    <div class="anatomy-grid">
+      <div>
+        <div class="anatomy-square" id="anatomySquare" aria-label="Ramanujan's 4x4 magic square for 22-12-1887"></div>
+      </div>
+      <div class="anatomy-legend">
+        <h3>Structure</h3>
+        <div class="legend-item">
+          <span class="legend-dot gold"></span>
+          <span><strong style="color:var(--gold)">Row 1</strong> — The date of birth: Day · Month · Century · Year</span>
+        </div>
+        <div class="legend-item">
+          <span class="legend-dot green"></span>
+          <span><strong style="color:var(--green)">Rows 2–4</strong> — Derived values ensuring every row, column, diagonal sums to the magic number</span>
+        </div>
+        <p style="margin-top:1rem; font-size:0.88rem; color:var(--text-muted); font-family:var(--font-mono); letter-spacing:0.04em;">
+          Magic sum for Ramanujan's square = 22 + 12 + 18 + 87 = <strong style="color:var(--green)">139</strong>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="formula-card reveal">
+    <h3>The Pattern Formula</h3>
+    <p style="font-size:0.9rem; color:var(--text-secondary); margin-bottom:1.25rem;">
+      Let d = day, m = month, c = century digits, y = year digits:
+    </p>
+    <div class="formula-grid">
+      <div class="formula-row">Row 1: <em>d · m · c · y</em></div>
+      <div class="formula-row">Row 2: <em>[y + 1,   c - 1,   m - 3,   d + 3]</em></div>
+      <div class="formula-row">Row 3: <em>[m - 2,   d + 2,   y + 2,   c - 2]</em></div>
+      <div class="formula-row">Row 4: <em>[c + 1,   y - 1,   d + 1,   m - 1]</em></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div style="max-width:600px; margin:0 auto;">
+    <div class="footer-logo">RAM_MagicSquare</div>
+    <p class="footer-text">Inspired by Srinivasa Ramanujan</p>
+    <p class="footer-year" id="footer-year"></p>
+  </div>
+</footer>
+
+</div>
+
+<script>
+document.getElementById('footer-year').textContent = '© ' + new Date().getFullYear() + ' RAM_MagicSquare';
+
+const navToggle = document.getElementById('navToggle');
+const navLinks  = document.getElementById('navLinks');
+navToggle.addEventListener('click', () => {
+  const open = navLinks.classList.toggle('open');
+  navToggle.setAttribute('aria-expanded', open);
+});
+
+/* Scroll reveal */
+const revealEls = document.querySelectorAll('.reveal');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+}, { threshold: 0.1 });
+revealEls.forEach(el => obs.observe(el));
+
+/* Anatomy square */
+(function() {
+  const d=22,m=12,c=18,y=87;
+  const sq = [
+    [d,m,c,y],
+    [y + 1,   c - 1,   m - 3,   d + 3],
+    [m - 2,   d + 2,   y + 2,   c - 2],
+    [c + 1,   y - 1,   d + 1,   m - 1]
+  ];
+  const grid = document.getElementById('anatomySquare');
+  sq.forEach((row,ri) => row.forEach(val => {
+    const cell = document.createElement('div');
+    cell.className = 'anatomy-cell ' + (ri===0 ? 'c-dob' : 'c-green');
+    cell.textContent = val;
+    grid.appendChild(cell);
+  }));
+})();
+
+/* Canvas */
+(function() {
+  const canvas = document.getElementById('math-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H;
+  function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+
+  function draw() {
+    ctx.clearRect(0,0,W,H);
+    const t = Date.now() * 0.0006;
+    const spacing = 36;
+    ctx.fillStyle = 'rgba(0,230,118,0.18)';
+    for (let x=0;x<W;x+=spacing) {
+      for (let y=0;y<H;y+=spacing) {
+        const pulse = Math.sin(t + x*0.012 + y*0.009)*0.5+0.5;
+        ctx.globalAlpha = 0.08 + pulse*0.1;
+        ctx.beginPath();
+        ctx.arc(x, y, 0.7+pulse*0.9, 0, Math.PI*2);
+        ctx.fill();
+      }
+    }
+    ctx.globalAlpha = 0.055;
+    ctx.strokeStyle = '#00e676'; ctx.lineWidth = 0.5;
+    for (let i=0;i<5;i++) {
+      const phase = ((t*0.3 + i/5) % 1);
+      const x = phase * W;
+      ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x-100,H); ctx.stroke();
+    }
+    ctx.globalAlpha = 1;
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+</script>
+</body>
+</html>

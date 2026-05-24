@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>RAM_MagicSquare</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="styles.css"/>
+
+</head>
+<body>
+
+<!-- Animated canvas background -->
+<canvas id="math-canvas"></canvas>
+
+<!-- Floating number particles -->
+<div class="float-numbers" id="floatNums" aria-hidden="true"></div>
+
+<div class="page-wrapper">
+
+<!-- ═══════════ NAV ═══════════ -->
+<nav role="navigation" aria-label="Main navigation">
+  <a href="index.html" class="nav-logo" aria-label="RAM MagicSquare Home">
+    <div class="nav-logo-mark" aria-hidden="true">
+      <span class="nav-logo-cell"></span>
+      <span class="nav-logo-cell"></span>
+      <span class="nav-logo-cell"></span>
+      <span class="nav-logo-cell"></span>
+    </div>
+    <span class="nav-brand">RAM_MagicSquare</span>
+  </a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+  </ul>
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section class="hero" id="home">
+  <p class="hero-eyebrow">Srinivasa Ramanujan · 22 December 1887</p>
+
+  <h1 class="hero-title">
+    Welcome to<br>
+    <span class="line-accent">RAM_MagicSquare</span>
+  </h1>
+
+  <p class="hero-subtitle">
+    Inspired by the legendary mathematician <strong>Srinivasa Ramanujan</strong> and his
+    famous <strong>4×4 magic square</strong> built from his date of birth,
+    this site lets you generate <em>your own</em> Ramanujan-style magic square.
+  </p>
+
+  <div class="hero-ornament" aria-hidden="true">
+    <span class="hero-ornament-line"></span>
+    <span class="hero-ornament-symbol">∑</span>
+    <span class="hero-ornament-line"></span>
+  </div>
+
+  <a href="#generator" class="cta-btn">
+    <span>Enter your date of birth</span>
+    <span class="arrow">↓</span>
+  </a>
+
+  <!-- Ramanujan's actual magic square showcase -->
+  <div class="hero-square-showcase" aria-label="Ramanujan's magic square for date 22-12-1887">
+    <p class="showcase-label">Ramanujan's Magic Square · Born 22 · 12 · 1887</p>
+    <div class="showcase-grid" id="showcaseGrid"></div>
+  </div>
+</section>
+
+<!-- ═══════════ DIVIDER ═══════════ -->
+<div class="section-divider" aria-hidden="true">
+  <span class="divider-line"></span>
+  <span class="divider-glyph">✦</span>
+  <span class="divider-line"></span>
+</div>
+
+<!-- ═══════════ WHAT IS A MAGIC SQUARE ═══════════ -->
+<section class="section reveal" id="about" aria-labelledby="about-heading">
+  <div class="section-header">
+    <span class="section-tag">§ Mathematical Concept</span>
+    <h2 class="section-title" id="about-heading">What is a Magic Square?</h2>
+  </div>
+  <div class="info-card">
+    <h2>The Mathematical Beauty</h2>
+    <p>
+      A magic square is a square grid of numbers where the sums of all rows, columns,
+      and both main diagonals are exactly the same. Ramanujan created a special
+      4×4 magic square where the first row shows his own birthday.
+    </p>
+    <p style="margin-top: 1rem;">
+      In Ramanujan's square the <span class="math-formula">magic sum = Day + Month + Year-century + Year-decade</span>
+      holds true across all <span class="math-formula">4 rows</span>,
+      <span class="math-formula">4 columns</span>,
+      <span class="math-formula">2 diagonals</span>,
+      and many other symmetric sub-groups — a testament to the infinite elegance of numbers.
+    </p>
+    <div class="card-bg-num" aria-hidden="true">∞</div>
+  </div>
+</section>
+
+<!-- ═══════════ GENERATOR ═══════════ -->
+<section class="generator-section reveal" id="generator" aria-labelledby="gen-heading">
+  <div class="section-header">
+    <span class="section-tag">§ Interactive Generator</span>
+    <h2 class="section-title" id="gen-heading">Create Your Own Ramanujan Magic Square</h2>
+    <p class="section-desc">
+      Fill in your date of birth. We'll use Ramanujan's pattern to build a 4×4 magic square
+      where the <strong style="color:var(--gold)">first row contains your DOB</strong>.
+    </p>
+  </div>
+
+  <div class="generator-card">
+    <!-- ── Inputs ── -->
+    <div class="dob-row">
+      <div class="field-group">
+        <label for="day">Day (DD)</label>
+        <input type="number" id="day" name="day" min="1" max="31" placeholder="DD" aria-label="Day of birth"/>
+      </div>
+      <div class="field-group">
+        <label for="month">Month (MM)</label>
+        <input type="number" id="month" name="month" min="1" max="12" placeholder="MM" aria-label="Month of birth"/>
+      </div>
+      <div class="field-group">
+        <label for="year">Year (YYYY)</label>
+        <input type="number" id="year" name="year" min="1" max="9999" placeholder="YYYY" aria-label="Year of birth"/>
+      </div>
+    </div>
+
+    <button class="generate-btn" id="generateBtn" onclick="generateMagicSquare()">
+      <span class="btn-icon" aria-hidden="true">⬡</span>
+      <span>Generate Magic Square</span>
+    </button>
+
+    <p class="hint-text">
+      Example: Ramanujan's DOB is <em>22-12-1887</em> → you get his famous magic square.
+    </p>
+
+    <!-- ── Result ── -->
+    <div class="result-section" id="result-section" aria-live="polite">
+      <h3>Your Magic Square</h3>
+
+      <div id="magic-square-output">
+        <p class="placeholder-msg" id="placeholder-msg">
+          No magic square yet. Enter your DOB and click "Generate".
+        </p>
+      </div>
+
+      <div class="magic-stats" id="magic-stats" style="display:none">
+        <div class="stat-card">
+          <div class="stat-label">Magic Sum</div>
+          <div class="stat-value" id="magic-sum-display">—</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Valid Magic Square</div>
+          <div class="stat-value" id="magic-valid-display">—</div>
+        </div>
+      </div>
+
+      <div class="note-block">
+        <strong style="color:var(--gold)">Note:</strong> Some dates may produce 0 or negative values in a few cells,
+        but the square is still mathematically valid as long as all rows, columns and diagonals
+        add up to the same magic sum.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">RAM_MagicSquare</div>
+    <p class="footer-text">Inspired by Srinivasa Ramanujan</p>
+    <p class="footer-year" id="footer-year"></p>
+  </div>
+</footer>
+
+</div><!-- .page-wrapper -->
+
+<!-- ═══════════════════════════════════════════════════
+     SCRIPTS — ALL ORIGINAL LOGIC PRESERVED
+     ═══════════════════════════════════════════════════ -->
+<script>
+/* ── Footer year ── */
+document.getElementById('footer-year').textContent = '© ' + new Date().getFullYear() + ' RAM_MagicSquare';
+
+/* ── Nav toggle ── */
+const navToggle = document.getElementById('navToggle');
+const navLinks  = document.getElementById('navLinks');
+navToggle.addEventListener('click', () => {
+  const open = navLinks.classList.toggle('open');
+  navToggle.setAttribute('aria-expanded', open);
+});
+
+/* ── Scroll reveal ── */
+const revealEls = document.querySelectorAll('.reveal');
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); revealObs.unobserve(e.target); }
+  });
+}, { threshold: 0.12 });
+revealEls.forEach(el => revealObs.observe(el));
+
+/* ── Smooth scroll for CTA ── */
+document.querySelector('.cta-btn').addEventListener('click', function(e) {
+  e.preventDefault();
+  document.getElementById('generator').scrollIntoView({ behavior: 'smooth' });
+});
+
+/* ═══════════════════════════════════════════════════
+   RAMANUJAN MAGIC SQUARE GENERATOR
+   (Original algorithm — untouched)
+   ═══════════════════════════════════════════════════ */
+function generateMagicSquare() {
+  const dayVal   = parseInt(document.getElementById('day').value,   10);
+  const monthVal = parseInt(document.getElementById('month').value, 10);
+  const yearVal  = parseInt(document.getElementById('year').value,  10);
+
+  if (isNaN(dayVal) || isNaN(monthVal) || isNaN(yearVal)) {
+    alert('Please enter a valid date of birth.');
+    return;
+  }
+
+  const d  = dayVal;
+  const m  = monthVal;
+  const c  = Math.floor(yearVal / 100);   // century part
+  const y  = yearVal % 100;               // decade/year part
+
+  /* Ramanujan's 4x4 magic square pattern based on DOB */
+  const square = [
+    [d,       m,       c,       y    ],
+    [y + 1,   c - 1,   m - 3,   d + 3],
+    [m - 2,   d + 2,   y + 2,   c - 2],
+    [c + 1,   y - 1,   d + 1,   m - 1]
+  ];
+
+  /* Flatten to verify magic sum */
+  const magicSum = square[0].reduce((a, b) => a + b, 0);
+
+  let isValid = true;
+  /* Check all rows */
+  for (let r = 0; r < 4; r++) {
+    if (square[r].reduce((a,b)=>a+b,0) !== magicSum) { isValid = false; break; }
+  }
+  /* Check all columns */
+  if (isValid) {
+    for (let col = 0; col < 4; col++) {
+      let s = 0;
+      for (let row = 0; row < 4; row++) s += square[row][col];
+      if (s !== magicSum) { isValid = false; break; }
+    }
+  }
+  /* Check main diagonals */
+  if (isValid) {
+    let d1 = 0, d2 = 0;
+    for (let i = 0; i < 4; i++) { d1 += square[i][i]; d2 += square[i][3-i]; }
+    if (d1 !== magicSum || d2 !== magicSum) isValid = false;
+  }
+
+  renderMagicSquare(square, magicSum, isValid);
+}
+
+/* ═══════════════════════════════════════════════════
+   RENDER — Premium cell display
+   ═══════════════════════════════════════════════════ */
+function renderMagicSquare(square, magicSum, isValid) {
+  const container = document.getElementById('magic-square-output');
+  const statsDiv  = document.getElementById('magic-stats');
+  const placeholder = document.getElementById('placeholder-msg');
+
+  if (placeholder) placeholder.remove();
+  container.innerHTML = '';
+
+  let cellIdx = 0;
+  square.forEach((row, rowIdx) => {
+    row.forEach((val, colIdx) => {
+      const cell = document.createElement('div');
+      cell.className = 'magic-cell ' + (rowIdx === 0 ? 'dob-row-cell' : 'normal-cell');
+      cell.style.setProperty('--cell-i', cellIdx++);
+      cell.textContent = val;
+      cell.setAttribute('aria-label', `Row ${rowIdx+1} Column ${colIdx+1}: ${val}`);
+      container.appendChild(cell);
+    });
+  });
+
+  /* Show stats */
+  statsDiv.style.display = 'grid';
+  const sumEl   = document.getElementById('magic-sum-display');
+  const validEl = document.getElementById('magic-valid-display');
+
+  sumEl.textContent   = magicSum;
+  validEl.textContent = isValid ? '✓ Yes' : '✗ No';
+  validEl.className   = 'stat-value ' + (isValid ? 'valid' : 'invalid');
+}
+
+/* ═══════════════════════════════════════════════════
+   SHOWCASE — Ramanujan's own square (22-12-1887)
+   ═══════════════════════════════════════════════════ */
+(function buildShowcase() {
+  const d=22, m=12, c=18, y=87;
+  const sq = [
+    [d,       m,       c,       y    ],
+    [y + 1,   c - 1,   m - 3,   d + 3],
+    [m - 2,   d + 2,   y + 2,   c - 2],
+    [c + 1,   y - 1,   d + 1,   m - 1]
+  ];
+  const grid = document.getElementById('showcaseGrid');
+  let i = 0;
+  sq.forEach((row, ri) => {
+    row.forEach(val => {
+      const cell = document.createElement('div');
+      cell.className = 'showcase-cell ' + (ri === 0 ? 'highlight-row' : '');
+      cell.style.setProperty('--i', i++);
+      cell.textContent = val;
+      grid.appendChild(cell);
+    });
+  });
+})();
+
+/* ═══════════════════════════════════════════════════
+   CANVAS — Animated mathematical grid
+   ═══════════════════════════════════════════════════ */
+(function initCanvas() {
+  const canvas = document.getElementById('math-canvas');
+  const ctx    = canvas.getContext('2d');
+  let W, H, particles = [];
+
+  function resize() {
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  /* Dot grid */
+  function drawGrid() {
+    ctx.clearRect(0, 0, W, H);
+
+    /* Fine dot grid */
+    const spacing = 36;
+    const t = Date.now() * 0.0006;
+
+    ctx.fillStyle = 'rgba(0,230,118,0.18)';
+    for (let x = 0; x < W; x += spacing) {
+      for (let y = 0; y < H; y += spacing) {
+        const pulse = Math.sin(t + x * 0.012 + y * 0.009) * 0.5 + 0.5;
+        const radius = 0.7 + pulse * 0.9;
+        ctx.globalAlpha = 0.08 + pulse * 0.1;
+        ctx.beginPath();
+        ctx.arc(x, y, radius, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    /* Travelling lines */
+    ctx.globalAlpha = 0.06;
+    ctx.strokeStyle = '#00e676';
+    ctx.lineWidth = 0.5;
+    const numLines = 6;
+    for (let i = 0; i < numLines; i++) {
+      const phase = (t * 0.3 + i / numLines) % 1;
+      const x = phase * W;
+      ctx.beginPath();
+      ctx.moveTo(x, 0);
+      ctx.lineTo(x - 120, H);
+      ctx.stroke();
+    }
+
+    ctx.globalAlpha = 1;
+    requestAnimationFrame(drawGrid);
+  }
+  drawGrid();
+})();
+
+/* ═══════════════════════════════════════════════════
+   FLOATING NUMBER PARTICLES
+   ═══════════════════════════════════════════════════ */
+(function spawnNumbers() {
+  const container = document.getElementById('floatNums');
+  const nums = ['∑','∞','π','√','∫','Δ','φ','Ω','22','12','1887','87','18','130'];
+  for (let i = 0; i < 18; i++) {
+    const el = document.createElement('span');
+    el.className = 'float-num';
+    el.textContent = nums[Math.floor(Math.random() * nums.length)];
+    el.style.cssText = [
+      `left:${Math.random()*100}%`,
+      `--dur:${14 + Math.random()*14}s`,
+      `--delay:${-Math.random()*20}s`,
+      `font-size:${10 + Math.random()*8}px`,
+      `opacity:0`
+    ].join(';');
+    container.appendChild(el);
+  }
+})();
+
+/* ── Enter key support for inputs ── */
+['day','month','year'].forEach(id => {
+  document.getElementById(id).addEventListener('keydown', e => {
+    if (e.key === 'Enter') generateMagicSquare();
+  });
+});
+</script>
+</body>
+</html>
